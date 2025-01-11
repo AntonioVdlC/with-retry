@@ -1,0 +1,70 @@
+{
+  "name": "with-retry",
+  "version": "0.0.0",
+  "description": "Retry asynchronous operations",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "type:check": "tsc src/*.ts --noEmit",
+    "format": "prettier --write --ignore-unknown {src,test}/*",
+    "format:check": "prettier --check {src,test}/*",
+    "lint": "eslint {src,test}/*",
+    "lint:fix": "eslint --fix {src,test}/*",
+    "pre-commit": "lint-staged",
+    "test": "vitest run --coverage",
+    "build": "npm run build:lib && npm run build:types",
+    "build:lib": "vite build",
+    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outDir dist && cp dist/index.d.ts dist/index.d.mts",
+    "postversion": "git push && git push --tags"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run format",
+      "npm run lint:fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioVdlC/with-retry.git"
+  },
+  "keywords": [
+    "retry",
+    "async"
+  ],
+  "author": "Antonio Villagra De La Cruz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonioVdlC/with-retry/issues"
+  },
+  "homepage": "https://github.com/AntonioVdlC/with-retry#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.19.1",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
