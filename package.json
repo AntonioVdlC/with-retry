@@ -31,7 +31,7 @@
     "test": "vitest run --coverage",
     "build": "npm run build:lib && npm run build:types",
     "build:lib": "vite build",
-    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outDir dist && cp dist/index.d.ts dist/index.d.mts",
+    "build:types": "tsc --declaration --emitDeclarationOnly && cp dist/index.d.ts dist/index.d.mts && cp dist/config.d.ts dist/config.d.mts",
     "postversion": "git push && git push --tags"
   },
   "lint-staged": {
