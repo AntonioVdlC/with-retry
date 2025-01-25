@@ -3,6 +3,7 @@
     "target": "ES2015",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
+    "lib": ["ES2015", "DOM"],
     "downlevelIteration": true,
     "strict": true,
     "esModuleInterop": true,
