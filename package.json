@@ -1,5 +1,5 @@
 {
-  "name": "with-retry",
+  "name": "@antoniovdlc/with-retry",
   "version": "0.0.0",
   "description": "Retry asynchronous operations",
   "main": "dist/index.js",

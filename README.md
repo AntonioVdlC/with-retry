@@ -1,9 +1,9 @@
 # with-retry
 
-[![version](https://img.shields.io/npm/v/with-retry.svg)](http://npm.im/with-retry)
-[![issues](https://img.shields.io/github/issues-raw/antoniovdlc/with-retry.svg)](https://github.com/AntonioVdlC/with-retry/issues)
-[![downloads](https://img.shields.io/npm/dt/with-retry.svg)](http://npm.im/with-retry)
-[![license](https://img.shields.io/npm/l/with-retry.svg)](http://opensource.org/licenses/MIT)
+[![version](https://img.shields.io/npm/v/@antoniovdlc/with-retry.svg)](https://npm.im/@antoniovdlc/with-retry)
+[![issues](https://img.shields.io/github/issues-raw/antoniovdlc/@antoniovdlc/with-retry.svg)](https://github.com/AntonioVdlC/with-retry/issues)
+[![downloads](https://img.shields.io/npm/dt/@antoniovdlc/with-retry.svg)](https://npm.im/@antoniovdlc/with-retry)
+[![license](https://img.shields.io/npm/l/@antoniovdlc/with-retry.svg)](https://opensource.org/licenses/MIT)
 
 Retry asynchronous operations
 
@@ -12,7 +12,7 @@ Retry asynchronous operations
 This package is distributed via npm:
 
 ```
-npm install with-retry
+npm install @antoniovdlc/with-retry
 ```
 
 ## Usage
@@ -20,13 +20,13 @@ npm install with-retry
 You can use this library either as an ES module or a CommonJS package:
 
 ```js
-import withRetry from "with-retry";
+import withRetry from "@antoniovdlc/with-retry";
 ```
 
 _- or -_
 
 ```js
-const withRetry = require("with-retry");
+const withRetry = require("@antoniovdlc/with-retry");
 ```
 
 You can then wrap any asynchronous function with `withRetry` and pass configuration options:
