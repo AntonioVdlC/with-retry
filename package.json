@@ -1,6 +1,6 @@
 {
   "name": "@antoniovdlc/with-retry",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Retry asynchronous operations",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
