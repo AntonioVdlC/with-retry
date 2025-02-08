@@ -277,4 +277,45 @@ describe("withRetry", () => {
     expect(result).toBe("Success");
     expect(attempts).toBe(5);
   });
+
+  describe("presets", () => {
+    it("retries until successful with persistent preset", async () => {
+      let attempts = 0;
+
+      const attemptsWithErrors = Math.floor(Math.random() * 20);
+
+      const result = await withRetry.persistent<string>(() => {
+        attempts += 1;
+        if (attempts < attemptsWithErrors) {
+          throw new Error("Failed");
+        }
+
+        return new Promise((resolve) => resolve("Success"));
+      });
+
+      expect(result).toBe("Success");
+      expect(attempts).toBe(attemptsWithErrors);
+    });
+  });
+
+  it("retries aggressively with the aggressive preset", async () => {
+    let attempts = 0;
+
+    const startTime = Date.now();
+
+    const result = await withRetry.aggressive<string>(() => {
+      attempts += 1;
+      if (attempts < 10) {
+        throw new Error("Failed");
+      }
+
+      return new Promise((resolve) => resolve("Success"));
+    });
+
+    const endTime = Date.now();
+
+    expect(result).toBe("Success");
+    expect(attempts).toBe(10);
+    expect(endTime - startTime).toBeLessThan(1000);
+  });
 });

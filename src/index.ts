@@ -1,6 +1,13 @@
 import { type RetryConfig, validateConfig } from "./config";
 import { calculateDelay } from "./delay";
 
+class RetryTimeoutError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "RetryTimeoutError";
+  }
+}
+
 function createRetryFunction(config: Partial<RetryConfig> = {}) {
   return async function retryFunction<T>(fn: () => Promise<T>): Promise<T> {
     const finalConfig = validateConfig(config);
@@ -40,16 +47,27 @@ function createRetryFunction(config: Partial<RetryConfig> = {}) {
   };
 }
 
-export function withRetry<T>(
+function withRetry<T>(
   fn: () => Promise<T>,
   config: Partial<RetryConfig> = {},
 ): Promise<T> {
   return createRetryFunction(config)(fn);
 }
 
-export class RetryTimeoutError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "RetryTimeoutError";
-  }
-}
+withRetry.persistent = createRetryFunction({ maxAttempts: Infinity });
+
+withRetry.aggressive = createRetryFunction({
+  maxAttempts: 10,
+  delay: 10,
+  maxDelay: 100,
+});
+
+withRetry.network = createRetryFunction({
+  backoffStrategy: "exponential",
+  delay: 100,
+  maxDelay: 1000,
+  jitter: 0.5,
+  timeout: 5000,
+});
+
+export { withRetry, RetryTimeoutError };
