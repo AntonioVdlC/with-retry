@@ -37,7 +37,6 @@
   "lint-staged": {
     "*.ts": [
       "npm run format",
-      "npm run type:check",
       "npm run lint:fix"
     ]
   },
